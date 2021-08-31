@@ -7,6 +7,11 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
+
+  },
+  devServer: {
+    historyApiFallback: true
   },
   plugins:[
     new HtmlWebPackPlugin({
@@ -26,5 +31,5 @@ module.exports = {
         }
       }
     }]
-  }
+  },
 };

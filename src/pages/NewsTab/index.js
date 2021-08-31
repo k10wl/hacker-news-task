@@ -1,10 +1,12 @@
 import React from "react";
 import usePageFetch from "../../customHooks/usePageFetch";
+import NewsTable from "../../components/NewsTable";
 
-function NewsTable() {
+function NewsTab({ location }) {
+  const [ url ] = React.useState(location.pathname.replace("/", ""));
   const [ appData, setAppData ] = React.useState([]);
   const [ pageNumber, setPageNumber ] = React.useState(1);
-  const pageData = usePageFetch(pageNumber);
+  const pageData = usePageFetch(url, pageNumber);
   const { news, loading, error, errorText } = pageData;
   const observer = React.useRef(null);
   const lastElementRef = React.useCallback((node) => {
@@ -50,4 +52,4 @@ function NewsTable() {
   );
 }
 
-export default NewsTable;
+export default NewsTab;
