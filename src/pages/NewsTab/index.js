@@ -2,8 +2,8 @@ import React from "react";
 import usePageFetch from "../../customHooks/usePageFetch";
 import NewsTable from "../../components/NewsTable";
 
-function NewsTab({ location }) {
-  const [ url ] = React.useState(location.pathname.replace("/", ""));
+function NewsTab({ location: { pathname } }) {
+  const [ url ] = React.useState(pathname.replace("/", ""));
   const [ appData, setAppData ] = React.useState([]);
   const [ pageNumber, setPageNumber ] = React.useState(1);
   const pageData = usePageFetch(url, pageNumber);
