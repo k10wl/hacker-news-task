@@ -25,8 +25,7 @@ function UsePageFetch(pageNumber) {
           id: el.id,
           time: el.time * 1000,
           title: el.title,
-          domain: el.domain ? el.domain : "",
-          url: el.url === /item?id=\d*/ ? el.url : "",
+          domain: el.domain ? el.domain : "news.ycombinator.com",
         }))];
         const uniqueNews = combinedData.filter((el, index, self) =>
           index === self.findIndex((t) => (
