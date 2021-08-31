@@ -18,20 +18,14 @@ function UsePageFetch(pageNumber) {
       cancelToken: new axios.CancelToken(c => cancel = c)
     })
       .then((r) => {
-        console.log(r);
         setLoading(false);
-        setNews((prevState) =>
-          [...new Set ([
-            ...prevState,
-            ...r.data.map((el) => ({
-              id: el.id,
-              time: el.time * 1000,
-              title: el.title,
-              domain: el.domain,
-              url: el.url ? el.url : null,
-            }))
-          ])]
-        )
+        setNews(r.data.map((el) => ({
+          id: el.id,
+          time: el.time * 1000,
+          title: el.title,
+          domain: el.domain ? el.domain : "",
+          url: el.url === /item?id=\d*/ ? el.url : "",
+        })));
       })
       .catch((e) => {
         setError(true);

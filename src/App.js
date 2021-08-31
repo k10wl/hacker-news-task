@@ -2,6 +2,7 @@ import React, { useRef, useCallback } from "react";
 import usePageFetch from "./customHooks/usePageFetch"
 
 function App() {
+  const [ appData, setAppData ] = React.useState([]);
   const [ pageNumber, setPageNumber ] = React.useState(1);
   const pageData = usePageFetch(pageNumber);
   const { news, loading, error } = pageData;
@@ -22,22 +23,46 @@ function App() {
       observer.current.observe(node)
     }
   }, [loading]);
+  React.useEffect(() => {
+    if (!loading && !error) {
+      const combinedData = [...appData, ...news];
+      const noDuplicates = combinedData.filter((el, index, self) =>
+        index === self.findIndex((t) => (
+          t.id === el.id
+        ))
+      )
+      setAppData(noDuplicates);
+    }
+  }, [loading, news, error, pageNumber])
+  function sortByDate() {
+    const sorted = appData.sort((a, b) => b.time - a.time);
+    setAppData([...sorted]);
+  }
+  function sortByName(e) {
+    const sorted = appData.sort((a, b) => a[e.target.id].localeCompare(b[e.target.id]));
+    setAppData([...sorted]);
+  }
   return (
     <div>
       <table border="1px">
         <thead>
           <tr>
-            <td>Time added</td>
-            <td>Title</td>
-            <td>Domain</td>
+            <td id="time" onClick={sortByDate}>Time added</td>
+            <td id="title" onClick={sortByName}>Title</td>
+            <td id="domain" onClick={sortByName}>Domain</td>
           </tr>
         </thead>
         <tbody>
-          {news.map((el, i) => {
-            if (i === news.length - 1) {
+          {appData.map((el, i) => {
+            const date = new Date(el.time);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
+            const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+            const displayDate = [day, month, year].join("/");
+            if (i === appData.length - 1) {
               return (
                 <tr key={ el.id } ref={lastElementRef}>
-                  <td>{ el.time }</td>
+                  <td>{ displayDate }</td>
                   <td>{ el.title }</td>
                   <td>{ el.domain }</td>
                 </tr>
@@ -46,10 +71,9 @@ function App() {
             return (
               <tr
                 key={ el.id }
-                onClick={
-                  () => el.url && window.open(el.url)
-                }>
-                <td>{ el.time }</td>
+                onClick={() => console.log(el)}
+              >
+                <td>{ displayDate }</td>
                 <td>{ el.title }</td>
                 <td>{ el.domain }</td>
               </tr>
