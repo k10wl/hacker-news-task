@@ -17,19 +17,11 @@ function NewsTable({sortByDate, sortByName, appData, lastElementRef}) {
         const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
         const day = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
         const displayDate = [day, month, year].join("/");
-        if (i === appData.length - 1) {
-          return (
-            <tr key={ el.id } ref={lastElementRef}>
-              <td>{ displayDate }</td>
-              <td>{ el.title }</td>
-              <td>{ el.domain }</td>
-            </tr>
-          )
-        }
         return (
           <tr
             key={ el.id }
             onClick={() => console.log(el)}
+            ref={i === appData.length - 1 ? lastElementRef : null}
           >
             <td>{ displayDate }</td>
             <td>{ el.title }</td>
