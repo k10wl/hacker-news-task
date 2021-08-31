@@ -5,7 +5,7 @@ function App() {
   const [ appData, setAppData ] = React.useState([]);
   const [ pageNumber, setPageNumber ] = React.useState(1);
   const pageData = usePageFetch(pageNumber);
-  const { news, loading, error } = pageData;
+  const { news, loading, error, errorText } = pageData;
   const observer = useRef(null);
   const lastElementRef = useCallback((node) => {
     if (loading) {
@@ -25,13 +25,7 @@ function App() {
   }, [loading]);
   React.useEffect(() => {
     if (!loading && !error) {
-      const combinedData = [...appData, ...news];
-      const noDuplicates = combinedData.filter((el, index, self) =>
-        index === self.findIndex((t) => (
-          t.id === el.id
-        ))
-      )
-      setAppData(noDuplicates);
+      setAppData(news);
     }
   }, [loading, news, error, pageNumber])
   function sortByDate() {
@@ -82,7 +76,7 @@ function App() {
         </tbody>
       </table>
       {loading && !error && <p>Loading...</p>}
-      {error && <p>Error!</p>}
+      {error && <p>Error: {errorText}</p>}
     </div>
   );
 }
