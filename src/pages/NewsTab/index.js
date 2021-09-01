@@ -54,7 +54,8 @@ function NewsTab({ location: { pathname } }) {
     setAppData([...sorted]);
   }
   return (
-    <>
+    <div className="table">
+      <h2>{url[0].toUpperCase()}{[...url.slice(1)]}</h2>
       <NewsTable
         sortByName={sortByName}
         appData={appData}
@@ -63,7 +64,7 @@ function NewsTab({ location: { pathname } }) {
       />
       {loading && !error && <p>Loading...</p>}
       {!hasMore && <p>end</p>}
-    </>
+    </div>
   );
 }
 
