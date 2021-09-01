@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 function UsePageFetch(hackerNewsPage, pageNumber) {
   const [ loading, setLoading ] = React.useState(false);
@@ -10,13 +9,13 @@ function UsePageFetch(hackerNewsPage, pageNumber) {
     setNews([]);
   }, []);
   React.useEffect(() => {
-    let cancel
+    const controller = new AbortController();
+    const signal = controller.signal;
     setLoading(true);
     setError(false);
-    axios({
+    fetch(`https://api.hnpwa.com/v0/${hackerNewsPage}/${pageNumber}.json`, {
       method: "get",
-      url: `https://api.hnpwa.com/v0/${hackerNewsPage}/${pageNumber}.json`,
-      cancelToken: new axios.CancelToken(c => cancel = c)
+      signal,
     })
       .then((r) => {
         setLoading(false);
@@ -43,7 +42,7 @@ function UsePageFetch(hackerNewsPage, pageNumber) {
         setError(true);
         console.log(e)
       })
-    return () => cancel();
+    return () => controller.abort();
   }, [pageNumber]);
   return { news, loading, error, hasMore }
 }
