@@ -40,12 +40,6 @@ table th {
     cursor: pointer;
 }
 
-a, a:link, a:visited, a:active {
-    text-decoration: none;
-    color: #000;
-    font-size: 1rem;
-}
-
 .mobileClient {
     width: 100%;
 }
