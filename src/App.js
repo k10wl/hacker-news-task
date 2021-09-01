@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import NewsTab from "./pages/NewsTab";
+import Comments from "./pages/Comments";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/news" component={(props) => <NewsTab {...props} />}/>
         <Route exact path="/newest" component={(props) => <NewsTab {...props} />}/>
+        <Route path="/comments/id:postId" component={(props) => <Comments {...props} />}/>
       </Switch>
     </Router>
   );

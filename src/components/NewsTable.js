@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NewsTable({sortByDate, sortByName, appData, lastElementRef}) {
   return (
@@ -24,7 +25,9 @@ function NewsTable({sortByDate, sortByName, appData, lastElementRef}) {
             ref={i === appData.length - 1 ? lastElementRef : null}
           >
             <td>{ displayDate }</td>
-            <td>{ el.title }</td>
+            <td>
+              <Link to={`comments/id${el.id}`}> {el.title} </Link>
+            </td>
             <td>{ el.domain }</td>
           </tr>
         )
