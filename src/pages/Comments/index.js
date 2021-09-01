@@ -5,7 +5,11 @@ function Comments({ location:  { pathname } }) {
   const id = pathname.split("/").pop().replace("id", "");
   const { data, loading, error } = useCommentsFetch(id)
   if (loading) {
-    return <h1>Loading</h1>
+    return (
+      <div className="component-root">
+        <h1>Loading</h1>
+      </div>
+    )
   }
   if (error) {
     console.log(error);
