@@ -12,7 +12,9 @@ table tr:nth-child(even) {
 }
 
 th:last-child,
-td:last-child {
+th:first-child,
+td:last-child,
+td:first-child {
     text-align: center;
 }
 
@@ -62,10 +64,4 @@ a, a:link, a:visited, a:active {
 
 .sort_by_date:hover {
     cursor: pointer;
-}
-
-@media only screen and (max-width: 900px) {
-    table {
-        width: 100%;
-    }
 }
