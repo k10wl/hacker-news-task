@@ -8,6 +8,7 @@ function useCommentsFetch(postId) {
     setLoading(true);
     setError(false);
     fetch(`https://api.hnpwa.com/v0/item/${postId}.json`)
+      .then((r) => r.json())
       .then((r) => {
         setData(r.data);
         setLoading(false);

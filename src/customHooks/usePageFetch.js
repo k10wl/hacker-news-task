@@ -17,9 +17,10 @@ function UsePageFetch(hackerNewsPage, pageNumber) {
       method: "get",
       signal,
     })
+      .then((r) => r.json())
       .then((r) => {
         setLoading(false);
-        const combinedData = [...news, ...r.data.map((el) => ({
+        const combinedData = [...news, ...r.map((el) => ({
           id: el.id,
           time: el.time * 1000,
           title: el.title,
