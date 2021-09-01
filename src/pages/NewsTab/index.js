@@ -3,6 +3,7 @@ import usePageFetch from "../../customHooks/usePageFetch";
 import NewsTable from "../../components/NewsTable";
 import { useStore } from "../../store/Store";
 import { addData } from "../../store/actions";
+import "./stylesheet.css";
 
 function NewsTab({ location: { pathname } }) {
   const [ url ] = React.useState(pathname.replace("/", ""));
