@@ -1,24 +1,38 @@
 import React from "react";
 import usePageFetch from "../../customHooks/usePageFetch";
 import NewsTable from "../../components/NewsTable";
+import { useStore } from "../../store/Store";
+import { addData } from "../../store/actions";
 
 function NewsTab({ location: { pathname } }) {
   const [ url ] = React.useState(pathname.replace("/", ""));
-  const [ appData, setAppData ] = React.useState([]);
-  const [ pageNumber, setPageNumber ] = React.useState(1);
+  const [state, dispatch] = useStore();
+  const { [url]: localState } = state;
+  const data = localState ? localState : [[]];
+  const [ appData, setAppData ] = React.useState(...data);
+  React.useEffect(() => {
+    if (localState) {
+      setAppData(...data)
+    }
+  }, [data])
+  const [ pageNumber, setPageNumber ] = React.useState(8);
   const pageData = usePageFetch(url, pageNumber);
-  const { news, loading, error, errorText } = pageData;
+  const { news, loading, error, hasMore } = pageData;
   const observer = React.useRef(null);
   const lastElementRef = React.useCallback((node) => {
     if (loading) {
-      return
+      return;
     }
     if (observer.current) {
       observer.current.disconnect();
     }
+    if (!hasMore) {
+      return;
+    }
     observer.current = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        setPageNumber(prevPageNumber => prevPageNumber + 1)
+        observer.current.disconnect();
+        setPageNumber(pageNumber + 1);
       }
     })
     if (node) {
@@ -26,8 +40,9 @@ function NewsTab({ location: { pathname } }) {
     }
   }, [loading]);
   React.useEffect(() => {
-    if (!loading && !error) {
-      setAppData(news);
+    if (!loading && !error && news.length !== 0) {
+      // setAppData(news);
+      dispatch(addData({target: url, data: news}))
     }
   }, [loading, news, error, pageNumber])
   function sortByDate() {
@@ -39,7 +54,7 @@ function NewsTab({ location: { pathname } }) {
     setAppData([...sorted]);
   }
   return (
-    <div>
+    <>
       <NewsTable
         sortByName={sortByName}
         appData={appData}
@@ -47,8 +62,8 @@ function NewsTab({ location: { pathname } }) {
         lastElementRef={lastElementRef}
       />
       {loading && !error && <p>Loading...</p>}
-      {error && <p>Error: {errorText}</p>}
-    </div>
+      {!hasMore && <p>end</p>}
+    </>
   );
 }
 

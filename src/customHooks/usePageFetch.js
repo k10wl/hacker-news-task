@@ -4,7 +4,7 @@ import axios from "axios";
 function UsePageFetch(hackerNewsPage, pageNumber) {
   const [ loading, setLoading ] = React.useState(false);
   const [ error, setError ] = React.useState(false);
-  const [ errorText, setErrorText ] = React.useState("");
+  const [ hasMore, setHasMore ] = React.useState(true);
   const [ news, setNews ] = React.useState([]);
   React.useEffect(() => {
     setNews([]);
@@ -13,7 +13,6 @@ function UsePageFetch(hackerNewsPage, pageNumber) {
     let cancel
     setLoading(true);
     setError(false);
-    setErrorText("");
     axios({
       method: "get",
       url: `https://api.hnpwa.com/v0/${hackerNewsPage}/${pageNumber}.json`,
@@ -33,15 +32,20 @@ function UsePageFetch(hackerNewsPage, pageNumber) {
           ))
         )
         setNews(uniqueNews);
+        if (hackerNewsPage === "news" && pageNumber > 10) {
+          setHasMore(false);
+        }
+        if (hackerNewsPage === "newest" && pageNumber > 12) {
+          setHasMore(false);
+        }
       })
       .catch((e) => {
-        console.log(e.toJSON())
         setError(true);
-        setErrorText(e.toJSON().message);
+        console.log(e)
       })
     return () => cancel();
   }, [pageNumber]);
-  return { news, loading, error, errorText }
+  return { news, loading, error, hasMore }
 }
 
 export default UsePageFetch;
