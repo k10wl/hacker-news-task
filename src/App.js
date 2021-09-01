@@ -2,18 +2,16 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import NewsTab from "./pages/NewsTab";
 import Comments from "./pages/Comments";
+import Header from "./components/Header";
 
 function App() {
   return (
     <Router>
-      <Link to="/news">• news</Link>
-      <span>|</span>
-      <Link to="/newest">• newest</Link>
+      <Header />
       <Switch>
         <Route exact path="/news" component={(props) => <NewsTab {...props} />}/>
         <Route exact path="/newest" component={(props) => <NewsTab {...props} />}/>
