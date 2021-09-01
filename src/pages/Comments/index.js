@@ -4,9 +4,12 @@ import useCommentsFetch from "../../customHooks/useCommentsFetch";
 function Comments({ location:  { pathname } }) {
   const id = pathname.split("/").pop().replace("id", "");
   const { data, loading, error } = useCommentsFetch(id)
-  console.log(data)
   if (loading) {
     return <h1>Loading</h1>
+  }
+  if (error) {
+    console.log(error);
+    return <h1>Something went wrong!</h1>
   }
   return (
     <div>
