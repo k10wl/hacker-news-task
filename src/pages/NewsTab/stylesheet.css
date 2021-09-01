@@ -3,3 +3,8 @@ div.table {
     justify-content: center;
     flex-direction: column;
 }
+
+.text-after-table {
+    text-align: center;
+    font-size: 1.5rem;
+}

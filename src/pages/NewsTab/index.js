@@ -16,7 +16,7 @@ function NewsTab({ location: { pathname } }) {
       setAppData(...data)
     }
   }, [data])
-  const [ pageNumber, setPageNumber ] = React.useState(1);
+  const [ pageNumber, setPageNumber ] = React.useState(10);
   const pageData = usePageFetch(url, pageNumber);
   const { news, loading, error, hasMore } = pageData;
   const observer = React.useRef(null);
@@ -55,7 +55,7 @@ function NewsTab({ location: { pathname } }) {
     setAppData([...sorted]);
   }
   return (
-    <div className="table">
+    <div className="table component-root">
       <h2>{url[0].toUpperCase()}{[...url.slice(1)]}</h2>
       <NewsTable
         sortByName={sortByName}
@@ -63,8 +63,8 @@ function NewsTab({ location: { pathname } }) {
         sortByDate={sortByDate}
         lastElementRef={lastElementRef}
       />
-      {loading && !error && <p>Loading...</p>}
-      {!hasMore && <p>end</p>}
+      {loading && !error && <p className="text-after-table">Loading...</p>}
+      {!hasMore  && !loading && <p className="text-after-table">There is nothing left. Come back later.</p>}
     </div>
   );
 }
