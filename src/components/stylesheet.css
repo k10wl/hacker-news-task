@@ -1,0 +1,71 @@
+table {
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px 2px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f6f6f6;
+}
+
+th:last-child,
+td:last-child {
+    text-align: center;
+}
+
+table tr:hover {
+    background-color: #d6d6d6;
+}
+
+table th {
+    padding: 5px 10px;
+    text-align: left;
+    background-color: #111111;
+    color: white;
+    cursor: pointer;
+}
+
+.cell {
+    overflow: hidden;
+    max-height: 3rem;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    cursor: pointer;
+}
+
+a, a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
+}
+
+.mobileClient {
+    width: 100%;
+}
+
+.sort_by_date {
+    position: fixed;
+    top: 95%;
+    left: 88%;
+    background-color: black;
+    padding: 10px;
+    border-radius: 500px;
+    color: white;
+    outline: none;
+    border: none;
+}
+
+.sort_by_date:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    table {
+        width: 100%;
+    }
+}
