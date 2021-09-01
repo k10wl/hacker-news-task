@@ -5,7 +5,9 @@ import "./stylesheet.css";
 function Header() {
   return (
     <header>
-      <p>HackerNews</p>
+      <Link to="/">
+        <p>HackerNews</p>
+      </Link>
       <div>
         <Link to="/news">
           <button type="button">

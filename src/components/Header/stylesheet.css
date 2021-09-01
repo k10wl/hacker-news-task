@@ -5,15 +5,20 @@ header {
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    padding: 0 10px;
+    position: absolute;
+    width: 100%;
+    top: 0;
 }
 
 header p {
+    padding: 0 10px;
     font-size: 1.5rem;
     line-height: 0.5rem;
+    color: white;
 }
 
 header div {
+    padding: 0 10px;
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
@@ -33,4 +38,10 @@ header button:hover {
     cursor: pointer;
     background-color: white;
     color: black;
+}
+
+header a, header a:link, header a:visited, header a:active {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem;
 }
