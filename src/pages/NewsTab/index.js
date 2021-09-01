@@ -15,7 +15,7 @@ function NewsTab({ location: { pathname } }) {
       setAppData(...data)
     }
   }, [data])
-  const [ pageNumber, setPageNumber ] = React.useState(8);
+  const [ pageNumber, setPageNumber ] = React.useState(1);
   const pageData = usePageFetch(url, pageNumber);
   const { news, loading, error, hasMore } = pageData;
   const observer = React.useRef(null);
