@@ -12,7 +12,7 @@ function Comments({ location:  { pathname } }) {
     return <h1>Something went wrong!</h1>
   }
   return (
-    <div>
+    <div className="component-root">
       <h1 align="center">{data.title}</h1>
       <hr />
       {data?.comments?.map((el) => {
