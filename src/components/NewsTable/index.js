@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-import "./stylesheet.css";
+import "./table.css";
 
 function NewsTable({sortByDate, sortByName, appData, lastElementRef}) {
   const mobileClient =

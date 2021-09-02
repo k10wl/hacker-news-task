@@ -8,7 +8,7 @@ import NewsTab from "./pages/NewsTab";
 import Comments from "./pages/Comments";
 import Header from "./components/Header";
 import StartingPage from "./pages/StartingPage";
-import "./stylesheet.css";
+import "./root-stylesheet.css";
 
 function App() {
   return (
