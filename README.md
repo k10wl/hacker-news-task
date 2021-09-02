@@ -1,6 +1,6 @@
-#Hacker news task
+# Hacker news task
 
-###This app was build following next requirements:
+### This app was build following next requirements:
 
 * develop an app which makes a request to HackerNews api and lists the result as a table of 3 columns: time added, title and domain
 * create a project without CRA (create-react-app)
@@ -22,7 +22,7 @@
 
 You can find this app on http://localhost:3000/
 
-##Tech stack:
+## Tech stack:
 `webpack`\
 `babel`\
 `html-webpack-plugin`\
