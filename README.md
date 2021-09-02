@@ -22,7 +22,7 @@
 
 You can find this app on http://localhost:3000/
 
-##Tech stack:
+##Tech stack: \
 `webpack`\
 `babel`\
 `html-webpack-plugin`\
