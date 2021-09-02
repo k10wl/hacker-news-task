@@ -46,8 +46,9 @@ table th {
 
 .sort_by_date {
     position: fixed;
-    top: 95%;
-    left: 88%;
+    bottom: 0;
+    right: 0;
+    transform: translate(-50%, -50%);
     background-color: black;
     padding: 10px;
     border-radius: 500px;
